@@ -93,12 +93,12 @@ page_from_elem :: proc(doc: ^xml.Document, elem: xml.Element) -> (page: Page) {
     slice.sort_by(page.cells, proc(i, j: Cell) -> bool {
         return i.type < j.type
     })
-    for cell, idx in &page.cells {
+    for &cell, idx in &page.cells {
         cell.id = idx
     }
 
     // connect source/target references etc.
-    for cell in &page.cells {
+    for &cell in &page.cells {
         for x in page.cells {
             if cell.mxgraph_source == x.mxgraph_id {
                 cell.source = x.id
